@@ -22,21 +22,21 @@
       <div class="container">
 
         <ul class="list-group my-5">
-          <li v-for="(todo,index) in todoList" class="list-group-item"> {{todo.text+(index+1)}} </li>
+          <li v-for="(todo,index) in todoList" class="list-group-item"> {{todo.text}} </li>
         </ul>
 
-        <form class="row row-cols-lg-auto g-3 align-items-center justify-content-center" action="index.html" method="POST">
+        <div class="row row-cols-lg-auto g-3 align-items-center justify-content-center">
 
           <div class="col-auto flex-grow-1">
             <label class="visually-hidden" for="newTodoInput">Name</label>
-            <input type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
+            <input v-model="newTodo" @keyup.enter.stop type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
           </div>
 
           <div class="col-12">
-            <button type="submit" class="btn btn-primary">Inserisci</button>
+            <button type="button" class="btn btn-primary" @click="addTodoCheck">Inserisci</button>
           </div>
 
-        </form>
+        </div>
 
       </div>
     </main>
