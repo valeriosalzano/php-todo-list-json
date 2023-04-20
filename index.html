@@ -29,14 +29,15 @@
     <main>
       <div class="container">
 
-        <ul class="list-group my-5">
+        <p v-if="!todoList.length" class="display-5 text-center py-3">La lista degli incarichi è vuota. <small class="fs-6">yay ~</small></p>
+        <ul v-else class="list-group my-5">
           <li v-for="(todo,index) in todoList" class="list-group-item d-flex align-items-center p-3">
             <p @click="checkTodo(index)" class="flex-grow-1 mb-0" :class="todo.done?'checked':''">{{todo.text}}</p>
             <i @click="deleteTodo(index)" class="fa-solid fa-trash-can btn btn-outline-danger"></i>
           </li>
         </ul>
 
-        <div class="row row-cols-lg-auto g-3 align-items-center justify-content-center">
+        <div class="row row-cols-lg-auto g-3 align-items-center justify-content-center py-3">
 
           <div class="col-12 flex-grow-1 flex-shrink-0">
             <label class="visually-hidden" for="newTodoInput">Name</label>
