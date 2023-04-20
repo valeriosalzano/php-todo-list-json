@@ -54,6 +54,20 @@ createApp({
         }).then(response => {
           this.todoList = response.data;
         })
+    },
+    checkTodo(index){
+      const data = {
+        operation: 'check',
+        index,
+      };
+
+      axios.post(this.serverUrl, data,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        }).then(response => {
+          this.todoList = response.data;
+        })
+      
     }
   },
 }).mount('#app')

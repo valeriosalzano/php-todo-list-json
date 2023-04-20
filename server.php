@@ -37,6 +37,8 @@
       case 'delete':
         array_splice($todoList,$_POST['index'],1);
         break;
+      case 'check':
+        $todoList[$_POST['index']]['done'] = !$todoList[$_POST['index']]['done'];
     }
     
   }
