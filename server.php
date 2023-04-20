@@ -24,11 +24,21 @@
     ];
   }
 
-  if(isset($_POST) && !empty($_POST['text'])){
-    $todoList[] = [ 
-      'text' => $_POST['text'], 
-      'done' => $_POST['done'] == 'false' ? false : true,
-    ];
+  if(isset($_POST) && !empty($_POST)){
+    switch ($_POST['operation']){
+      case 'add':
+        if(isset($_POST['text'])&&!empty($_POST['text'])){
+          $todoList[] = [ 
+            'text' => $_POST['text'], 
+            'done' => $_POST['done'] == 'false' ? false : true,
+          ];
+        }
+        break;
+      case 'delete':
+        array_splice($todoList,$_POST['index'],1);
+        break;
+    }
+    
   }
   $todoListJson = json_encode($todoList);
 

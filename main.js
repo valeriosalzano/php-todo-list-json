@@ -28,6 +28,7 @@ createApp({
     },
     addTodo(){
       const data = {
+        operation: 'add',
         text: this.newTodo.text,
         done: this.newTodo.done,
       };
@@ -37,9 +38,21 @@ createApp({
           headers: { 'Content-Type': 'multipart/form-data' }
         }).then(response => {
           this.todoList = response.data;
-          console.log(response.data);
           this.newTodo.text = '';
           this.newTodo.done = false;
+        })
+    },
+    deleteTodo(index){
+      const data = {
+        operation: 'delete',
+        index,
+      };
+
+      axios.post(this.serverUrl, data,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        }).then(response => {
+          this.todoList = response.data;
         })
     }
   },
