@@ -6,7 +6,11 @@ createApp({
     return {
       todoList: [],
       serverUrl: 'server.php',
-      newTodo: '',
+      newTodo: {
+        text: '',
+        done: false,
+      }
+
     }
   },
   mounted() {
@@ -18,13 +22,14 @@ createApp({
       .then(response => this.todoList = response.data)
     },
     addTodoCheck(){
-      if(this.newTodo && this.newTodo.trim() != ''){
+      if(this.newTodo.text && this.newTodo.text.trim() != ''){
         this.addTodo();
       }
     },
     addTodo(){
       const data = {
-        newTodo: this.newTodo,
+        text: this.newTodo.text,
+        done: this.newTodo.done,
       };
 
       axios.post(this.serverUrl, data,
@@ -33,7 +38,8 @@ createApp({
         }).then(response => {
           this.todoList = response.data;
           console.log(response.data);
-          this.newTodo = '';
+          this.newTodo.text = '';
+          this.newTodo.done = false;
         })
     }
   },

@@ -19,8 +19,11 @@
     ],
   ];
 
-  if(isset($_POST['newTodo']) && !empty($_POST['newTodo'])){
-    $todoList[] = [ 'text' => $_POST['newTodo'], 'done' => false,];
+  if(isset($_POST) && !empty($_POST['text'])){
+    $todoList[] = [ 
+      'text' => $_POST['text'], 
+      'done' => $_POST['done'] == 'false' ? false : true,
+    ];
   }
 
   header('Content-Type: application/json');

@@ -10,6 +10,12 @@
   <title>PHP ToDo List JSON</title>
 </head>
 
+<style>
+  .checked {
+    text-decoration: line-through;
+  }
+</style>
+
 <body>
 
   <div id="app" class="text-bg-dark vh-100">
@@ -22,17 +28,24 @@
       <div class="container">
 
         <ul class="list-group my-5">
-          <li v-for="(todo,index) in todoList" class="list-group-item"> {{todo.text}} </li>
+          <li v-for="(todo,index) in todoList" class="list-group-item" :class="todo.done?'checked':''"> {{todo.text}} </li>
         </ul>
 
         <div class="row row-cols-lg-auto g-3 align-items-center justify-content-center">
 
-          <div class="col-auto flex-grow-1">
+          <div class="col flex-grow-1">
             <label class="visually-hidden" for="newTodoInput">Name</label>
-            <input v-model="newTodo" @keyup.enter.stop type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
+            <input v-model="newTodo.text" @keyup.enter.stop type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
           </div>
 
-          <div class="col-12">
+          <div class="form-check col">
+            <input class="form-check-input" type="checkbox" id="newTodoCheck" v-model="newTodo.done">
+            <label class="form-check-label" for="newTodoCheck">
+              Completato
+            </label>
+          </div>
+      
+          <div class="col">
             <button type="button" class="btn btn-primary" @click="addTodoCheck">Inserisci</button>
           </div>
 
