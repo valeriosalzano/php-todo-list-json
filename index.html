@@ -35,7 +35,7 @@
 
           <div class="col flex-grow-1">
             <label class="visually-hidden" for="newTodoInput">Name</label>
-            <input v-model="newTodo.text" @keyup.enter.stop type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
+            <input v-model="newTodo.text" @keyup.enter="addTodoCheck" type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
           </div>
 
           <div class="form-check col">
