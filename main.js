@@ -5,7 +5,7 @@ createApp({
   data() {
     return {
       todoList: [],
-      serverUrl: 'server.php',
+      serverUrl: 'server/server.php',
       newTodo: {
         text: '',
         done: false,
@@ -19,7 +19,7 @@ createApp({
   methods: {
     getTodoList(){
       axios.get(this.serverUrl)
-      .then(response => this.todoList = response.data)
+      .then(response => this.todoList = response.data ? response.data : [] )
     },
     addTodoCheck(){
       if(this.newTodo.text && this.newTodo.text.trim() != ''){
@@ -29,8 +29,7 @@ createApp({
     addTodo(){
       const data = {
         operation: 'add',
-        text: this.newTodo.text,
-        done: this.newTodo.done,
+        newTodo: this.newTodo,
       };
 
       axios.post(this.serverUrl, data,
