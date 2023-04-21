@@ -7,16 +7,19 @@
   if(isset($_POST) && !empty($_POST)){
 
     switch ($_POST['operation']){
-      case 'add':
-        $todoList[] = addToData($_POST['newTodo'],'text','done');
 
+      case 'add':
+        $todoList[] = addData($_POST['newTodo'],$todoList);
         break;
+        
       case 'delete':
-        array_splice($todoList,$_POST['index'],1);
+        $todoList = deleteData($_POST['todoItem'],$todoList);
         break;
+
       case 'check':
-        $todoList[$_POST['index']]['done'] = !$todoList[$_POST['index']]['done'];
+        $todoList = checkData($_POST['todoItem'],$todoList);
         break;
+
       case 'get':
 
       default :

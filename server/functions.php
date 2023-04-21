@@ -31,12 +31,36 @@ function getData($fileName){
   return $data;
 };
 
-function addToData($postItem){
+function addData($postItem,$data){
   if(isset($postItem)&&!empty($postItem)){
+
+    foreach ($data as $key => $item) {
+      if($item['text'] == $postItem['text']){
+        header('HTTP/1.1 400 Bad Request');
+        http_response_code(400);
+        echo 'Task already exists!';
+        die();        
+      }
+    }
 
     $done = $postItem['done'];
     $postItem['done'] = $done === 'false' ? false : true;
-
-    return $postItem;
   }
+  return $postItem;
+}
+
+function deleteData($postItem,$data){
+  foreach ($data as $key => $dataItem) {
+    $dataItem['text'] == $postItem['text'] ? $index = $key : '';
+  }
+  array_splice($data,$index,1);
+  return $data;
+}
+
+function checkData($postItem,$data){
+  foreach ($data as $key => $dataItem) {
+    $dataItem['text'] == $postItem['text'] ? $index = $key : '';
+  }
+  $data[$index]['done'] = !$data[$index]['done'];
+  return $data;
 }

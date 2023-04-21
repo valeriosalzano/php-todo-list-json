@@ -36,37 +36,36 @@ createApp({
         {
           headers: { 'Content-Type': 'multipart/form-data' }
         }).then(response => {
-          this.todoList = response.data;
+          this.todoList = response.data ? response.data : [];
+          this.newTodo.text = '';
+          this.newTodo.done = false;
+        }).catch(err => {
+          alert(err.response.data);
           this.newTodo.text = '';
           this.newTodo.done = false;
         })
     },
-    deleteTodo(index){
+    deleteTodo(todoItem){
       const data = {
         operation: 'delete',
-        index,
+        todoItem,
       };
 
       axios.post(this.serverUrl, data,
         {
           headers: { 'Content-Type': 'multipart/form-data' }
-        }).then(response => {
-          this.todoList = response.data;
-        })
+        }).then(response => this.todoList = response.data ? response.data : [] )
     },
-    checkTodo(index){
+    checkTodo(todoItem){
       const data = {
         operation: 'check',
-        index,
+        todoItem,
       };
 
       axios.post(this.serverUrl, data,
         {
           headers: { 'Content-Type': 'multipart/form-data' }
-        }).then(response => {
-          this.todoList = response.data;
-        })
-      
-    }
+        }).then(response => this.todoList = response.data ? response.data : [])
+    },
   },
 }).mount('#app')
