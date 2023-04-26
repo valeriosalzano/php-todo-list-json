@@ -19,9 +19,7 @@
       case 'check':
         $todoList = checkData($_POST['todoItem'],$todoList);
         break;
-
-      case 'get':
-
+        
       default :
         header('HTTP/1.1 400 Bad Request');
         http_response_code(400);

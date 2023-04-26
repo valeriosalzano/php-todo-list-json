@@ -24,28 +24,25 @@
 
         <p v-if="!todoList.length" class="display-5 text-center py-3">La lista degli incarichi è vuota. <small class="fs-6">yay ~</small></p>
         <ul v-else class="list-group my-5">
-          <li v-for="(todo,index) in todoList" class="list-group-item d-flex align-items-center p-3">
-            <p @click="checkTodo(todo)" class="flex-grow-1 mb-0" :class="{'text-decoration-line-through' : todo.done == true}">{{todo.text}}</p>
+          <li v-for="(todo,index) in todoList" class="list-group-item d-flex align-items-center p-3 ">
+            <i v-if="todo.done" class="fa-solid fa-check me-3 fs-4 text-success"></i>
+            <i v-else class="fa-solid fa-xmark me-3 fs-4 text-danger"></i>
+            <p @click="checkTodo(todo)" class="flex-grow-1 mb-0 fs-4" :class="{'text-decoration-line-through' : todo.done == true}">{{todo.text}}</p>
             <i @click="deleteTodo(todo)" class="fa-solid fa-trash-can btn btn-outline-danger"></i>
           </li>
         </ul>
 
-        <div class="row row-cols-lg-auto g-3 align-items-center justify-content-center py-3">
-
-          <div class="col-12 flex-grow-1 flex-shrink-0">
-            <label class="visually-hidden" for="newTodoInput">Name</label>
-            <input v-model="newTodo.text" @keyup.enter="addTodoCheck" type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo todo...">
+        <div class="row row-cols-lg-auto g-3 align-items-center justify-content-center">
+          
+          <div class="input-group mb-3 col-12 col-lg-8 flex-grow-1 flex-shrink-0 w-auto">
+            <input v-model="newTodo.text" @keyup.enter="addTodoCheck" type="text" class="form-control" id="newTodoInput" placeholder="Inserisci un nuovo elemento...">
+            <button type="button" class="btn btn-outline-warning w-25" @click="addTodoCheck">Inserisci</button>
           </div>
-
-          <div class="form-check col-auto mx-3">
+          <div class="form-check col-auto mx-3 container-fluid">
             <input class="form-check-input" type="checkbox" id="newTodoCheck" v-model="newTodo.done">
             <label class="form-check-label" for="newTodoCheck">
               Completato
             </label>
-          </div>
-      
-          <div class="col-auto mx-3">
-            <button type="button" class="btn btn-primary" @click="addTodoCheck">Inserisci</button>
           </div>
 
         </div>

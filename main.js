@@ -29,7 +29,7 @@ createApp({
     addTodo(){
       const data = {
         operation: 'add',
-        newTodo: this.newTodo,
+        newTodo: {...this.newTodo},
       };
 
       axios.post(this.serverUrl, data,
@@ -37,13 +37,11 @@ createApp({
           headers: { 'Content-Type': 'multipart/form-data' }
         }).then(response => {
           this.todoList = response.data ? response.data : [];
-          this.newTodo.text = '';
-          this.newTodo.done = false;
         }).catch(err => {
           alert(err.response.data);
-          this.newTodo.text = '';
-          this.newTodo.done = false;
         })
+        this.newTodo.text = '';
+        this.newTodo.done = false;
     },
     deleteTodo(todoItem){
       const data = {
